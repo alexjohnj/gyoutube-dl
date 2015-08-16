@@ -10,6 +10,12 @@ import Cocoa
 
 class MainViewController: NSViewController {
 
+    @IBOutlet weak var videoTable: NSTableView!
+    @IBOutlet weak var urlField: NSTextField!
+    @IBOutlet weak var addButton: NSButton!
+    @IBOutlet weak var removeButton: NSButton!
+    @IBOutlet weak var startButton: NSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,5 +29,11 @@ class MainViewController: NSViewController {
     }
 
 
+    @IBAction func addLink(sender: AnyObject) {
+    }
+    @IBAction func removeSelectedLink(sender: AnyObject) {
+    }
+    @IBAction func startDownload(sender: AnyObject) {
+    }
 }
 

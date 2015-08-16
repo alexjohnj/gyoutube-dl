@@ -28,9 +28,36 @@ class MainViewController: NSViewController, NSTableViewDelegate, NSTableViewData
     
     // MARK: Actions
     @IBAction func addLink(sender: AnyObject) {
+        let inputString = urlField.stringValue
+        
+        guard let inputURL = NSURL(string:inputString) else {
+            print("invalid URL")
+            return
+        }
+        if videoLinks.contains(inputURL) {
+            urlField.stringValue = ""
+            return
+        }
+        videoLinks.append(inputURL)
+        urlField.stringValue = ""
+        videoTable.reloadData()
+        startButton.enabled = true
     }
+    
     @IBAction func removeSelectedLink(sender: AnyObject) {
+        let selectedRows = videoTable.selectedRowIndexes
+        guard selectedRows.count > 0 else {
+            NSBeep()
+            return
+        }
+        // This won't work if there's duplicate items but 
+        // that's why we prevent entering duplicate items!
+        videoLinks = videoLinks.filter { (link: NSURL) -> Bool in
+            return !selectedRows.containsIndex(videoLinks.indexOf(link)!)
+        }
+        videoTable.reloadData()
     }
+    
     @IBAction func startDownload(sender: AnyObject) {
     }
     

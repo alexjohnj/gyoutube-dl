@@ -872,6 +872,10 @@ Gw
                             <constraint firstAttribute="bottom" secondItem="97a-eY-uuO" secondAttribute="bottom" constant="20" symbolic="YES" id="whY-aS-zS8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancelCloseButton" destination="97a-eY-uuO" id="t8O-Vy-OJ6"/>
+                        <outlet property="progressBar" destination="bTj-4A-Pi6" id="3cO-h6-4E4"/>
+                    </connections>
                 </viewController>
                 <customObject id="LhV-Yw-9a7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

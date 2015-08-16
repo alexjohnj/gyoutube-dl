@@ -26,6 +26,11 @@ class MainViewController: NSViewController, NSTableViewDelegate, NSTableViewData
         // Do any additional setup after loading the view.
     }
     
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        let dlViewController = segue.destinationController as! DownloadViewController
+        dlViewController.videoLinks = videoLinks
+    }
+    
     // MARK: Actions
     @IBAction func addLink(sender: AnyObject) {
         let inputString = urlField.stringValue
@@ -50,7 +55,7 @@ class MainViewController: NSViewController, NSTableViewDelegate, NSTableViewData
             NSBeep()
             return
         }
-        // This won't work if there's duplicate items but 
+        // This won't work if there's duplicate items but
         // that's why we prevent entering duplicate items!
         videoLinks = videoLinks.filter { (link: NSURL) -> Bool in
             return !selectedRows.containsIndex(videoLinks.indexOf(link)!)

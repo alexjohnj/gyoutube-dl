@@ -773,6 +773,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="startDownload:" target="XfG-lQ-9wD" id="RTN-fg-5Dq"/>
+                                    <segue destination="udf-UY-PWv" kind="sheet" id="Ciq-kd-hVB"/>
                                 </connections>
                             </button>
                             <stackView orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bH8-m2-80p"/>
@@ -814,6 +815,67 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+        <!--DownloadView-->
+        <scene sceneID="EoQ-bH-ct3">
+            <objects>
+                <viewController title="DownloadView" id="udf-UY-PWv" customClass="DownloadViewController" customModule="gyoutube_dl" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="AaX-Th-WBL">
+                        <rect key="frame" x="0.0" y="0.0" width="357" height="111"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WN8-ip-23A">
+                                <rect key="frame" x="18" y="74" width="321" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Downloading 1 of 10" id="mwP-1S-X2R">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="djl-vt-jhw">
+                                <rect key="frame" x="18" y="49" width="321" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Video Title" id="mp3-Bj-KRm">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="bTj-4A-Pi6">
+                                <rect key="frame" x="20" y="22" width="238" height="20"/>
+                            </progressIndicator>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="97a-eY-uuO">
+                                <rect key="frame" x="260" y="13" width="83" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTI-oA-pys">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="udf-UY-PWv" id="0Pg-Wu-SNU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bTj-4A-Pi6" firstAttribute="top" secondItem="djl-vt-jhw" secondAttribute="bottom" constant="8" symbolic="YES" id="09M-ka-wkp"/>
+                            <constraint firstAttribute="trailing" secondItem="WN8-ip-23A" secondAttribute="trailing" constant="20" symbolic="YES" id="6kc-wp-lfF"/>
+                            <constraint firstItem="97a-eY-uuO" firstAttribute="top" secondItem="djl-vt-jhw" secondAttribute="bottom" constant="8" symbolic="YES" id="HDn-Md-IdD"/>
+                            <constraint firstItem="WN8-ip-23A" firstAttribute="top" secondItem="AaX-Th-WBL" secondAttribute="top" constant="20" symbolic="YES" id="MnY-fj-ZXW"/>
+                            <constraint firstItem="djl-vt-jhw" firstAttribute="leading" secondItem="WN8-ip-23A" secondAttribute="leading" id="P47-9n-nm2"/>
+                            <constraint firstItem="bTj-4A-Pi6" firstAttribute="leading" secondItem="djl-vt-jhw" secondAttribute="leading" id="aeP-6c-uZd"/>
+                            <constraint firstAttribute="trailing" secondItem="djl-vt-jhw" secondAttribute="trailing" constant="20" symbolic="YES" id="bUR-1Y-pkJ"/>
+                            <constraint firstItem="djl-vt-jhw" firstAttribute="top" secondItem="WN8-ip-23A" secondAttribute="bottom" constant="8" symbolic="YES" id="dNf-bx-Du5"/>
+                            <constraint firstAttribute="trailing" secondItem="97a-eY-uuO" secondAttribute="trailing" constant="20" symbolic="YES" id="knS-qs-uEz"/>
+                            <constraint firstItem="97a-eY-uuO" firstAttribute="leading" secondItem="bTj-4A-Pi6" secondAttribute="trailing" constant="8" symbolic="YES" id="n6v-dM-obE"/>
+                            <constraint firstItem="WN8-ip-23A" firstAttribute="leading" secondItem="AaX-Th-WBL" secondAttribute="leading" constant="20" symbolic="YES" id="qwk-mE-DhS"/>
+                            <constraint firstAttribute="bottom" secondItem="97a-eY-uuO" secondAttribute="bottom" constant="20" symbolic="YES" id="whY-aS-zS8"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="LhV-Yw-9a7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33.5" y="935.5"/>
         </scene>
     </scenes>
 </document>

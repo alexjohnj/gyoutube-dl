@@ -12,6 +12,7 @@
 		FA3983961B80937F008530A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA3983951B80937F008530A4 /* Assets.xcassets */; };
 		FA3983991B80937F008530A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3983971B80937F008530A4 /* Main.storyboard */; };
 		FAC3E04B1B80AE980012C1F4 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3E04A1B80AE980012C1F4 /* DownloadViewController.swift */; };
+		FAC3E04D1B80AEE50012C1F4 /* VideoDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3E04C1B80AEE50012C1F4 /* VideoDownloadOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		FA3983981B80937F008530A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA39839A1B80937F008530A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAC3E04A1B80AE980012C1F4 /* DownloadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
+		FAC3E04C1B80AEE50012C1F4 /* VideoDownloadOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				FA3983951B80937F008530A4 /* Assets.xcassets */,
 				FA3983971B80937F008530A4 /* Main.storyboard */,
 				FAC3E04A1B80AE980012C1F4 /* DownloadViewController.swift */,
+				FAC3E04C1B80AEE50012C1F4 /* VideoDownloadOperation.swift */,
 				FA39839A1B80937F008530A4 /* Info.plist */,
 			);
 			path = "gyoutube-dl";
@@ -136,6 +139,7 @@
 				FA3983941B80937F008530A4 /* MainViewController.swift in Sources */,
 				FAC3E04B1B80AE980012C1F4 /* DownloadViewController.swift in Sources */,
 				FA3983921B80937F008530A4 /* AppDelegate.swift in Sources */,
+				FAC3E04D1B80AEE50012C1F4 /* VideoDownloadOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

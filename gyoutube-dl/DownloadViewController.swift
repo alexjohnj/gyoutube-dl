@@ -23,22 +23,19 @@ class DownloadViewController: NSViewController {
         }
         downloadOperation!.removeObserver(self, forKeyPath: "isExecuting")
         downloadOperation!.removeObserver(self, forKeyPath: "isFinished")
+        downloadOperation!.removeObserver(self, forKeyPath: "currentTitleProgress")
     }
     
     // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let videoLinks = videoLinks else {
-            print("Nil links provided to DownloadViewController (in viewDidLoad())")
-            return
-        }
-        progressBar.maxValue = Double(videoLinks.count)
+        progressBar.maxValue = 1.0
         progressBar.minValue = 0
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
-
+        
         guard let videoLinks = videoLinks else {
             print("Nil links provided to DownloadViewController (in viewDidAppear())")
             return
@@ -46,6 +43,7 @@ class DownloadViewController: NSViewController {
         downloadOperation = VideoDownloadOperation(videoLinks: videoLinks)
         downloadOperation!.addObserver(self, forKeyPath: "isExecuting", options: .New, context: nil)
         downloadOperation!.addObserver(self, forKeyPath: "isFinished", options: .New, context: nil)
+        downloadOperation!.addObserver(self, forKeyPath: "currentTitleProgress", options: .New, context: nil)
         downloadOperation!.start()
     }
     
@@ -66,6 +64,9 @@ class DownloadViewController: NSViewController {
                 cancelCloseButton.title = "Close"
             }
             print("Finished downloading")
+        case "currentTitleProgress":
+            let currentProgress = newValue as! Double
+            progressBar.doubleValue = currentProgress
         default:
             break
         }

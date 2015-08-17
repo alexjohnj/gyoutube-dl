@@ -11,6 +11,8 @@ import Cocoa
 class VideoDownloadOperation: NSOperation {
     // MARK: Properties
     let videoLinks:[NSURL]
+    dynamic var currentTitle = ""
+    dynamic var currentTitleProgress = 0.0
     
     private let videoDownloadTask = NSTask()
     private let outputFileHandle: NSFileHandle
@@ -86,7 +88,30 @@ class VideoDownloadOperation: NSOperation {
     }
     
     func readDidComplete(noti: NSNotification) {
-        // TODO: Implement
+        guard let userInfo = noti.userInfo else {
+            print("Read data userInfo was nil")
+            return
+        }
+        guard let readDataOpt = userInfo[NSFileHandleNotificationDataItem] else {
+            print("Read data did not have any data")
+            return
+        }
+        let readData = readDataOpt as! NSData
+        let stringDataReprOpt = NSString(data: readData, encoding: NSUTF8StringEncoding)
+        guard let stringDataRepr = stringDataReprOpt else {
+            print("Unable to parse output of youtube-dl")
+            return
+        }
+        
+        // Attempt to extract information about the download
+        let outputParser = YoutubeDLOutputParser()
+        if let dlPercentage = outputParser.extractCompletionPercentageFromOutput(stringDataRepr as String) {
+            currentTitleProgress = dlPercentage / 100
+        }
+        
+        if !finished {
+            outputFileHandle.readInBackgroundAndNotify()
+        }
     }
     
     func taskDidTerminate(noti: NSNotification) {

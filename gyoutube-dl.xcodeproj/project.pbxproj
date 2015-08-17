@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0544971B82479A00114C57 /* YoutubeDLOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0544961B82479A00114C57 /* YoutubeDLOutputParser.swift */; };
 		FA3983921B80937F008530A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3983911B80937F008530A4 /* AppDelegate.swift */; };
 		FA3983941B80937F008530A4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3983931B80937F008530A4 /* MainViewController.swift */; };
 		FA3983961B80937F008530A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA3983951B80937F008530A4 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0544961B82479A00114C57 /* YoutubeDLOutputParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeDLOutputParser.swift; sourceTree = "<group>"; };
 		FA39838E1B80937F008530A4 /* gyoutube-dl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gyoutube-dl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3983911B80937F008530A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA3983931B80937F008530A4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				FA3983971B80937F008530A4 /* Main.storyboard */,
 				FAC3E04A1B80AE980012C1F4 /* DownloadViewController.swift */,
 				FAC3E04C1B80AEE50012C1F4 /* VideoDownloadOperation.swift */,
+				FA0544961B82479A00114C57 /* YoutubeDLOutputParser.swift */,
 				FA39839A1B80937F008530A4 /* Info.plist */,
 			);
 			path = "gyoutube-dl";
@@ -137,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3983941B80937F008530A4 /* MainViewController.swift in Sources */,
+				FA0544971B82479A00114C57 /* YoutubeDLOutputParser.swift in Sources */,
 				FAC3E04B1B80AE980012C1F4 /* DownloadViewController.swift in Sources */,
 				FA3983921B80937F008530A4 /* AppDelegate.swift in Sources */,
 				FAC3E04D1B80AEE50012C1F4 /* VideoDownloadOperation.swift in Sources */,

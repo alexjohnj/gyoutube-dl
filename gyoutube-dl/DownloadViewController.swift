@@ -53,6 +53,19 @@ class DownloadViewController: NSViewController {
         downloadOperation!.start()
     }
     
+    @IBAction func cancelDownloadOperation(sender: AnyObject) {
+        defer {
+            dismissController(self)
+        }
+        guard let downloadOperation = downloadOperation else {
+            return
+        }
+        if downloadOperation.finished {
+            return
+        }
+        downloadOperation.cancel()
+    }
+    
     // MARK: KVO
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         guard let keyPath = keyPath else { return }

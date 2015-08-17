@@ -79,6 +79,15 @@ class VideoDownloadOperation: NSOperation {
         outputFileHandle.readInBackgroundAndNotify()
     }
     
+    override func cancel() {
+        videoDownloadTask.terminate()
+        // Perform these tasks in case taskDidTerminate notification
+        // doesn't get chance to fire
+        outputFileHandle.closeFile()
+        executing = false
+        finished = true
+    }
+    
     private func configureOperation() {
         let outputDirectory = NSURL.fileURLWithPathComponents([NSHomeDirectory(), "Music", "%(title)s.%(ext)s"])!
         videoDownloadTask.launchPath = "/usr/local/bin/youtube-dl"
@@ -87,6 +96,8 @@ class VideoDownloadOperation: NSOperation {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "readDidComplete:", name: NSFileHandleReadCompletionNotification, object: outputFileHandle)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "taskDidTerminate:", name: NSTaskDidTerminateNotification, object: videoDownloadTask)
     }
+    
+    // MARK: Notification Responses
     
     func readDidComplete(noti: NSNotification) {
         guard let userInfo = noti.userInfo else {

@@ -872,7 +872,7 @@ Gw
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="dismissController:" target="udf-UY-PWv" id="0Pg-Wu-SNU"/>
+                                    <action selector="cancelDownloadOperation:" target="udf-UY-PWv" id="qNR-s2-QoA"/>
                                 </connections>
                             </button>
                         </subviews>

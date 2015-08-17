@@ -105,6 +105,9 @@ class VideoDownloadOperation: NSOperation {
         
         // Attempt to extract information about the download
         let outputParser = YoutubeDLOutputParser()
+        if let dlTitle = outputParser.extractVideoTitleFromOutput(stringDataRepr as String) {
+            currentTitle = dlTitle
+        }
         if let dlPercentage = outputParser.extractCompletionPercentageFromOutput(stringDataRepr as String) {
             currentTitleProgress = dlPercentage / 100
         }

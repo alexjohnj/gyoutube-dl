@@ -895,6 +895,7 @@ Gw
                     <connections>
                         <outlet property="cancelCloseButton" destination="97a-eY-uuO" id="t8O-Vy-OJ6"/>
                         <outlet property="progressBar" destination="bTj-4A-Pi6" id="3cO-h6-4E4"/>
+                        <outlet property="statusField" destination="WN8-ip-23A" id="HR2-AP-11c"/>
                         <outlet property="videoTitleField" destination="djl-vt-jhw" id="YQH-41-x0m"/>
                     </connections>
                 </viewController>

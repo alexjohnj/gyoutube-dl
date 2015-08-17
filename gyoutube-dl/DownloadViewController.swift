@@ -13,6 +13,7 @@ class DownloadViewController: NSViewController {
     var downloadOperation: VideoDownloadOperation?
     
     // MARK: Outlets
+    @IBOutlet weak var statusField: NSTextField!
     @IBOutlet weak var videoTitleField: NSTextField!
     @IBOutlet weak var progressBar: NSProgressIndicator!
     @IBOutlet weak var cancelCloseButton: NSButton!
@@ -26,6 +27,7 @@ class DownloadViewController: NSViewController {
         downloadOperation!.removeObserver(self, forKeyPath: "isFinished")
         downloadOperation!.removeObserver(self, forKeyPath: "currentTitleProgress")
         downloadOperation!.removeObserver(self, forKeyPath: "currentTitle")
+        downloadOperation!.removeObserver(self, forKeyPath: "currentVideoIndex")
     }
     
     // MARK: View Life Cycle
@@ -47,6 +49,7 @@ class DownloadViewController: NSViewController {
         downloadOperation!.addObserver(self, forKeyPath: "isFinished", options: .New, context: nil)
         downloadOperation!.addObserver(self, forKeyPath: "currentTitleProgress", options: .New, context: nil)
         downloadOperation!.addObserver(self, forKeyPath: "currentTitle", options: .New, context: nil)
+        downloadOperation!.addObserver(self, forKeyPath: "currentVideoIndex", options: .New, context: nil)
         downloadOperation!.start()
     }
     
@@ -73,6 +76,9 @@ class DownloadViewController: NSViewController {
         case "currentTitle":
             let currentTitle = newValue as! String
             videoTitleField.stringValue = currentTitle
+        case "currentVideoIndex":
+            let currentVideoIndex = newValue as! Int
+            statusField.stringValue = "Downloading \(currentVideoIndex) of \(videoLinks!.count)"
         default:
             break
         }

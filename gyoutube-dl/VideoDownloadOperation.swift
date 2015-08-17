@@ -13,6 +13,7 @@ class VideoDownloadOperation: NSOperation {
     let videoLinks:[NSURL]
     dynamic var currentTitle = ""
     dynamic var currentTitleProgress = 0.0
+    dynamic var currentVideoIndex = 0
     
     private let videoDownloadTask = NSTask()
     private let outputFileHandle: NSFileHandle
@@ -106,7 +107,10 @@ class VideoDownloadOperation: NSOperation {
         // Attempt to extract information about the download
         let outputParser = YoutubeDLOutputParser()
         if let dlTitle = outputParser.extractVideoTitleFromOutput(stringDataRepr as String) {
-            currentTitle = dlTitle
+            if dlTitle != currentTitle {
+                currentTitle = dlTitle
+                currentVideoIndex++
+            }
         }
         if let dlPercentage = outputParser.extractCompletionPercentageFromOutput(stringDataRepr as String) {
             currentTitleProgress = dlPercentage / 100

@@ -93,8 +93,8 @@ class VideoDownloadOperation: NSOperation {
         videoDownloadTask.launchPath = "/usr/local/bin/youtube-dl"
         videoDownloadTask.arguments = ["-x", "--audio-format", "mp3", "--output", outputDirectory.path!] + videoLinks.map { $0.absoluteString }
         videoDownloadTask.environment = ["PATH": "/usr/local/bin/:$PATH"]
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "readDidComplete:", name: NSFileHandleReadCompletionNotification, object: outputFileHandle)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "taskDidTerminate:", name: NSTaskDidTerminateNotification, object: videoDownloadTask)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoDownloadOperation.readDidComplete(_:)), name: NSFileHandleReadCompletionNotification, object: outputFileHandle)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoDownloadOperation.taskDidTerminate(_:)), name: NSTaskDidTerminateNotification, object: videoDownloadTask)
     }
     
     // MARK: Notification Responses
@@ -120,7 +120,7 @@ class VideoDownloadOperation: NSOperation {
         if let dlTitle = outputParser.extractVideoTitleFromOutput(stringDataRepr as String) {
             if dlTitle != currentTitle {
                 currentTitle = dlTitle
-                currentVideoIndex++
+                currentVideoIndex += 1
             }
         }
         if let dlPercentage = outputParser.extractCompletionPercentageFromOutput(stringDataRepr as String) {

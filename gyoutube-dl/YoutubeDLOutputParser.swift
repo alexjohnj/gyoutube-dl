@@ -16,20 +16,14 @@ class YoutubeDLOutputParser: NSObject {
     - returns: An optional double containing a number between 0-100
     */
     func extractCompletionPercentageFromOutput(output: String) -> Double? {
-        let progressRegexp = try! NSRegularExpression(pattern: "[0-9]+\\.?[0-9]+%", options: .CaseInsensitive)
-        let matches = progressRegexp.matchesInString(output, options: [], range: NSMakeRange(0, output.characters.count))
-        guard matches.count > 0 else {
+        let progressRegexp = try! NSRegularExpression(pattern: "[0-9]+\\.?[0-9]+%", options: .caseInsensitive)
+        let matches = progressRegexp.matches(in: output, options: [], range: NSMakeRange(0, output.characters.count))
+
+        guard let percentageRange = matches.last?.range.stringRange(for: output) else {
             return nil
         }
-        
-        let lastMatch = matches[matches.count - 1]
-        guard lastMatch != NSNotFound else {
-            return nil
-        }
-        
-        var percentageString: String = (output as NSString).substringWithRange(lastMatch.range)
-        percentageString = percentageString.stringByReplacingOccurrencesOfString("%", withString: "")
-        return (percentageString as NSString).doubleValue
+        let percentageString = output[percentageRange].replacingOccurrences(of: "%", with: "")
+        return Double(percentageString)
     }
     
     /** Attempts to extract the current download's video title. It does this using the output file 
@@ -39,20 +33,14 @@ class YoutubeDLOutputParser: NSObject {
     - returns: An optional String that will contain the video's title
     */
     func extractVideoTitleFromOutput(output: String) -> String? {
-        let titleRegexp = try! NSRegularExpression(pattern: "\\[download\\]\\ Destination:.+", options: .CaseInsensitive)
-        let matches = titleRegexp.matchesInString(output, options: [], range: NSMakeRange(0, output.characters.count))
-        guard matches.count > 0 else {
+        let titleRegexp = try! NSRegularExpression(pattern: "\\[download\\]\\ Destination:.+", options: .caseInsensitive)
+        let matches = titleRegexp.matches(in: output, options: [], range: NSMakeRange(0, output.characters.count))
+
+        guard let fullLineRange = matches.last?.range.stringRange(for: output) else {
             return nil
         }
-        
-        let lastMatch = matches[matches.count - 1]
-        guard lastMatch != NSNotFound else {
-            return nil
-        }
-        
-        let fullLine = (output as NSString).substringWithRange(lastMatch.range)
-        let outputFilePath = (fullLine as NSString).stringByReplacingOccurrencesOfString("[download] Destination: ", withString: "")
-        
-        return ((outputFilePath as NSString).lastPathComponent as NSString).stringByDeletingPathExtension
+
+        let outputPath = output[fullLineRange].replacingOccurrences(of: "[download] Destination:", with: "")
+        return ((outputPath as NSString).lastPathComponent as NSString).deletingPathExtension
     }
 }

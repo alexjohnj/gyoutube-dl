@@ -14,10 +14,8 @@ future.
 
 ## Build
 
-Build gyoutube-dl by opening the `.xcworkspace` file and building as
-normal in Xcode. You'll need to use a beta of Xcode 7 since
-gyoutube-dl is written in Swift 2.0. There is a Podfile in the project
-but it has no dependencies at the moment, so don't worry about that.
+Build gyoutube-dl by opening the `.xcodeproj` file and building as normal in
+Xcode. gyoutube-dl is written in Swift 4.0 so you'll need to use Xcode 9.
 
 ## Running
 

@@ -9,7 +9,7 @@
 import Cocoa
 
 class DownloadViewController: NSViewController {
-    var videoLinks: [NSURL]?
+    var videoLinks: [URL]?
     var downloadOperation: VideoDownloadOperation?
     
     // MARK: Outlets

@@ -10,7 +10,7 @@ import Cocoa
 
 class MainViewController: NSViewController {
     // MARK: Properties
-    var videoLinks: [NSURL] = []
+    var videoLinks: [URL] = []
     
     // MARK: Outlets
     @IBOutlet weak var videoTable: NSTableView!
@@ -37,19 +37,23 @@ class MainViewController: NSViewController {
     // MARK: Actions
     @IBAction func addLink(_ sender: AnyObject) {
         let inputString = urlField.stringValue
-        
-        guard let inputURL = NSURL(string:inputString) else {
-            print("invalid URL")
+
+        guard let inputURL = URL(string: inputString),
+            inputURL.scheme == "http" || inputURL.scheme == "https" else {
+            print("User was silly and entered an invalid URL")
             return
         }
-        if videoLinks.contains(inputURL) {
-            urlField.stringValue = ""
-            return
+
+        // Avoid entering duplicate URLs
+        if let index = videoLinks.index(of: inputURL) {
+            videoTable.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
+        } else {
+            videoLinks.append(inputURL)
+            videoTable.reloadData()
+            startButton.isEnabled = true
         }
-        videoLinks.append(inputURL)
+
         urlField.stringValue = ""
-        videoTable.reloadData()
-        startButton.isEnabled = true
     }
     
     @IBAction func removeSelectedLink(_ sender: AnyObject) {
@@ -59,14 +63,13 @@ class MainViewController: NSViewController {
             return
         }
 
-        // This won't work if there's duplicate items but
-        // that's why we prevent entering duplicate items!
-        videoLinks = videoLinks.filter { (link: NSURL) -> Bool in
-            return !selectedRows.contains(videoLinks.index(of: link)!)
-        }
+        videoLinks = videoLinks.enumerated()
+            .filter { !selectedRows.contains($0.offset) }
+                .map { videoLinks[$0.offset] }
+
         videoTable.reloadData()
     }
-    
+
     @IBAction func startDownload(sender: AnyObject) {
     }
 }
@@ -88,7 +91,7 @@ extension MainViewController: NSTableViewDataSource {
 
         let cellView = tableView.makeView(withIdentifier: tableColumn.identifier, owner: self) as! NSTableCellView
         cellView.objectValue = videoLinks[row]
-        cellView.textField?.stringValue = videoLinks[row].absoluteString ?? ""
+        cellView.textField?.stringValue = videoLinks[row].absoluteString
 
         return cellView
     }

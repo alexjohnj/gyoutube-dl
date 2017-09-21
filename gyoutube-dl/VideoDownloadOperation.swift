@@ -10,7 +10,7 @@ import Cocoa
 
 class VideoDownloadOperation: Operation {
     // MARK: Properties
-    let videoLinks: [NSURL]
+    let videoLinks: [URL]
 
     @objc dynamic var currentTitle = ""
     @objc dynamic var currentTitleProgress = 0.0
@@ -52,7 +52,7 @@ class VideoDownloadOperation: Operation {
     override var isAsynchronous: Bool { return _asynchronous }
     
     // MARK: Object Lifecycle
-    init(videoLinks: [NSURL]) {
+    init(videoLinks: [URL]) {
         self.videoLinks = videoLinks
         
         let pipe = Pipe()
@@ -94,7 +94,7 @@ class VideoDownloadOperation: Operation {
     private func configureOperation() {
         let outputDirectory = NSURL.fileURL(withPathComponents: [NSHomeDirectory(), "Music", "%(title)s.%(ext)s"])!
         videoDownloadTask.launchPath = "/usr/local/bin/youtube-dl"
-        videoDownloadTask.arguments = ["-x", "--audio-format", "mp3", "--output", outputDirectory.path] + videoLinks.map { $0.absoluteString! }
+        videoDownloadTask.arguments = ["-x", "--audio-format", "mp3", "--output", outputDirectory.path] + videoLinks.map { $0.absoluteString }
         videoDownloadTask.environment = ["PATH": "/usr/bin/:/usr/local/bin/"]
 
         notiCenter.addObserver(self,
